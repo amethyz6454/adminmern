@@ -9,7 +9,6 @@ import {
 	ListItemButton,
 	ListItemIcon,
 	ListItemText,
-	ListitemText,
 	Typography,
 	useTheme,
 } from "@mui/material";
@@ -92,7 +91,7 @@ const navItems = [
 	},
 ];
 
-function Sidebar({ isNonMobile, drawerWidth, isSidebarOpen, setIsSidebarOpen }) {
+function Sidebar({ user, isNonMobile, drawerWidth, isSidebarOpen, setIsSidebarOpen }) {
 	const { pathname } = useLocation();
 	const [active, setActive] = useState("");
 	const navigate = useNavigate();
@@ -156,19 +155,13 @@ function Sidebar({ isNonMobile, drawerWidth, isSidebarOpen, setIsSidebarOpen }) 
 										}}
 										sx={{
 											bgcolor: active === lcText ? theme.palette.secondary[300] : "transparent",
-											color:
-												active === lcText
-													? theme.palette.primary[600]
-													: theme.palette.secondary[100],
+											color: active === lcText ? theme.palette.primary[600] : theme.palette.secondary[100],
 										}}
 									>
 										<ListItemIcon
 											sx={{
 												ml: "2rem",
-												color:
-													active === lcText
-														? theme.palette.primary[600]
-														: theme.palette.secondary[200],
+												color: active === lcText ? theme.palette.primary[600] : theme.palette.secondary[200],
 											}}
 										>
 											{icon}
@@ -180,6 +173,35 @@ function Sidebar({ isNonMobile, drawerWidth, isSidebarOpen, setIsSidebarOpen }) 
 							);
 						})}
 					</List>
+				</Box>
+
+				<Box position="absolute" bottom="2rem">
+					<Divider />
+					<FlexBetween textTransform="none" gap="1rem" m="1.5rem 2rem 0 3rem">
+						<Box
+							component="img"
+							alt="profile"
+							src={profileImage}
+							height={40}
+							width={40}
+							borderRadius="50%"
+							sx={{ objectFit: "cover" }}
+						/>
+						<Box textAlign="left">
+							<Typography fontWeight="bold" fontSize="0.9rem" sx={{ color: theme.palette.secondary[100] }}>
+								{user.name}
+							</Typography>
+							<Typography fontSize="0.8rem" sx={{ color: theme.palette.secondary[200] }}>
+								{user.occupation}
+							</Typography>
+						</Box>
+						<SettingsOutlined
+							sx={{
+								color: theme.palette.secondary[300],
+								fontSize: 25,
+							}}
+						/>
+					</FlexBetween>
 				</Box>
 			</Drawer>
 		</Box>
